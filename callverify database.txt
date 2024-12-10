@@ -1,0 +1,77 @@
+Databases/Tables Overview
+1. Table-Users
+                Purpose: To store information about the users of the application.
+		Example Fields:
+		---UserID (Primary Key)
+		---Name
+		---Email
+		---PhoneNo
+		---Createdon
+		---IsSpam(Boolean)
+2.Table-Contacts
+		Purpose: To store users' saved contact details and their associations.
+		Example Fields:
+		---ContactID (Primary Key)
+		---UserID (Foreign Key referencing the User Database)
+		---PhoneNo
+		---SavedName
+		---createdon
+3. Table-Spams
+		Purpose: To track numbers that have been reported as spam.
+		Example Fields:
+		---SpamID (Primary Key)
+		---phoneno
+		---ReportedBy (Foreign Key referencing the User Database)
+		---ReportDate
+		---ReportReason (Optional: e.g., telemarketing, sam)
+		---SpamStatus (Boolean: Verified spam or not)
+4. Table-Searches
+		Purpose: To store phone numbers checked against the system.
+		Example Fields:
+		---SearchID (Primary Key)
+		---SearchedUser(foreign key user id)
+		---searchedby (foreign key user id)
+		---Createdon
+
+Database:
+=========
+     ===>I created a database in SqlServer and the name of the database is Callverify.
+     ===>I created the tables structure in the below
+		==>User1
+			    CREATE TABLE User1 (
+                                           	UserID INT PRIMARY KEY,
+    					   	Name VARCHAR(100),
+    						Email VARCHAR(100),
+   						PhoneNo VARCHAR(15),
+   						CreatedOn DATE,
+    						IsSpam bit
+						);
+		==>Contacts
+			    CREATE TABLE Contacts (
+    						ContactID INT PRIMARY KEY,
+    						UserID INT,
+   						PhoneNo varchar(15),
+    						SavedName varchar(100),
+    						CreatedOn DATE
+						foreign key (userID) REFERENCES Usert(UserID)
+						);
+		==>Spams
+			   CREATE TABLE Spam (
+    						SpamID INT PRIMARY KEY,
+   						PhoneNo VARCHAR(15),
+    						ReportedBy int,
+    						ReportDate DATE,
+    						ReportReason VARCHAR(255),
+    						SpamStatus bit,
+    						FOREIGN KEY (ReportedBy) REFERENCES Usert(userid)
+					    );
+		==>Searches
+			 create table searches(
+						Searchid int primary key,
+						Searchedbyuser int,
+						searchedby int,
+						Createdon date,
+						foreign key(Searchedbyuser) references usert(userid),
+						foreign key(Searchedby) references usert(userid)
+					   );
+

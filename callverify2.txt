@@ -1,0 +1,55 @@
+1. Spam Detection
+
+
+Problem:
+========
+	---Users can mistakenly or deliberately mark numbers (even those belonging to friends or relatives) as spam. This misclassification can lead to important contacts being flagged as spam.
+
+Proposed Solution:
+==================
+Verification of Number Usage:
+-------------------------------
+	---Check whether the reported number is active or not. This can be done by verifying if the number is currently registered or in use.
+Database Lookup:
+----------------
+	---Check if the number exists in the application database or user records.
+Contact Popularity Analysis:
+----------------------------
+	---Count how many users have saved this number in their contact lists.
+	---If a significant number of users have saved this number, it is less likely to be spam.
+Final Assessment:
+-----------------
+	---If no one has saved the number or very few users have it in their contacts, it can be flagged as potential spam.
+Key Considerations:
+--------------------
+	---Utilize crowdsourced data while respecting user privacy.
+	---Include an option for users to appeal incorrect spam classifications.
+	---Use machine learning models to dynamically update the spam detection logic based on false positive reports.
+
+
+
+2. Ambiguity in Name Representation
+Problem:
+========
+	---When multiple users save the same phone number under different names (e.g., "abc12" and "abcbro"), it becomes unclear which name should be displayed when searching for the number.
+
+Proposed Solution
+=================
+Database Query:
+----------------
+	---Check if the number exists in the system's database.
+Retrieve Associated Names:
+--------------------------
+	---Fetch all the names under which this number has been saved across users.
+Similarity Analysis:
+--------------------
+	---Use algorithms to identify similar patterns among the saved names (e.g., "abc12" and "abcbro" share "abc").
+	---If a common pattern is found, prioritize it.
+User-Specific Context:
+----------------------
+	---Display the name that the current user has saved, if available.
+	---If no user-specific name exists, display the most commonly used or popular name.
+Key Considerations:
+-------------------
+	---Allow users to add a "preferred name" for numbers they frequently interact with.
+	---Use AI-based clustering techniques for better name similarity detection.
